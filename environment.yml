@@ -1,0 +1,12 @@
+name: churn-aml-env
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+    - azure-ai-ml
+    - azure-identity
+    - scikit-learn
+    - pandas
+    - joblib

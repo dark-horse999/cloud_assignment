@@ -1,0 +1,16 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type: command
+name: churn-train-job
+compute: azureml:my-aml-cluster
+environment: azureml:churn-ml-env:1  # alternatively reference environment file when registering env
+code: ./
+inputs:
+  training_data:
+    type: uri_file
+    path: azureml:customer_churn_dataset-training-master.csv@latest   # <-- replace with your data asset name
+outputs:
+  model_output:
+    type: uri_folder
+    path: azureml://datastores/workspaceblobstore/paths/models/churn/
+command: >
+  python train.py --data_path ${{inputs.training_data}} --output_dir ${{outputs.model_output}} --test_size 0.2

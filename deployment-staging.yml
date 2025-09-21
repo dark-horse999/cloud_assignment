@@ -1,0 +1,10 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: blue
+endpoint_name: churn-endpoint
+model: azureml:churn_pipeline:1   # replace with the model name:version you registered
+environment: azureml:churn-ml-env:1
+code_configuration:
+  code: ./deploy   # folder where score.py lives
+  scoring_script: score.py
+instance_type: Standard_DS3_v2
+instance_count: 1
